@@ -15,7 +15,12 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@ngrx-species/core-data": ["libs/core-data/src/index.ts"],
+      "@ngrx-species/core-state": ["libs/core-state/src/index.ts"],
+      "@ngrx-species/material": ["libs/material/src/index.ts"],
+      "@ngrx-species/ui-login": ["libs/ui-login/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
