@@ -28,7 +28,7 @@ const speciesReducer = createReducer(
     Object.assign({}, state, { selectedSpecieId })
   ),
   on(speciesActions.speciesLoaded, (state, { species }) =>
-    speciesAdapter.addAll(species, { ...state, isLoading: false })
+    speciesAdapter.setAll(species, { ...state, isLoading: false })
   ),
   on(speciesActions.specieCreated, (state, { specie }) =>
     speciesAdapter.addOne(specie, { ...state, isLoading: false })
