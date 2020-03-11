@@ -51,7 +51,7 @@ export const deleteSpecie = createAction(
 );
 
 export const specieDeleted = createAction(
-  '[SPECIE] Delete Specie',
+  '[SPECIE] Specie Deleted',
   props<{ specie: Specie }>()
 );
 

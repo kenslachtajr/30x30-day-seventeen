@@ -11,7 +11,7 @@
   <div class="col-50">
     <ngrx-species-species-details
       [form]="form"
-      [specie]="selectedSpecie"
+      [specie]="selectedSpecie$ | async"
       (saved)="saveSpecie($event)"
       (cancelled)="resetSpecie()"
     >

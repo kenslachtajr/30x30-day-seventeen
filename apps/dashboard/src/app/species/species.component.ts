@@ -11,7 +11,7 @@ import { Observable } from 'rxjs';
 })
 export class SpeciesComponent implements OnInit {
   form: FormGroup;
-  selectedSpecie: Specie;
+  selectedSpecie$: Observable<Specie> = this.speciesFacade.selectedSpecie$;
   species$: Observable<Specie[]> = this.speciesFacade.allSpecies$;
 
   constructor(
@@ -36,7 +36,6 @@ export class SpeciesComponent implements OnInit {
 
   selectSpecie(specie: Specie) {
     this.speciesFacade.selectSpecie(specie.id);
-    this.selectedSpecie = specie;
     this.form.patchValue(specie);
   }
 
