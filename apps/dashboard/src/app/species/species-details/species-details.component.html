@@ -2,7 +2,7 @@
   <mat-card-header>
     <mat-card-title>
       <h1>
-        <span *ngIf="currentSpecie.id; else elseBlock"></span>
+        <span *ngIf="currentSpecie.id; else elseBlock">{{originalTitle}}</span>
         <ng-template #elseBlock>Select A Specie</ng-template>
       </h1>
     </mat-card-title>
