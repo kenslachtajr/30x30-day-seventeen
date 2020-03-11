@@ -1,20 +1,20 @@
 <div class="container">
   <div class="col-50">
-    <species-species-list
-      [species]="specie$ | async"
+    <ngrx-species-species-list
+      [species]="species$ | async"
       (selected)="selectSpecie($event)"
       (deleted)="deleteSpecie($event)"
     >
-    </species-species-list>
+    </ngrx-species-species-list>
   </div>
 
   <div class="col-50">
-    <species-species-details
+    <ngrx-species-species-details
       [form]="form"
       [specie]="selectedSpecie"
-      (saved)="saveSpecie()"
-      (cancelled)="cancel()"
+      (saved)="saveSpecie($event)"
+      (cancelled)="resetSpecie()"
     >
-    </species-species-details>
+    </ngrx-species-species-details>
   </div>
 </div>

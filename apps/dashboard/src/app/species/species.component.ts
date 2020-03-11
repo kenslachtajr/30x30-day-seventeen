@@ -1,74 +1,66 @@
 import { Component, OnInit } from '@angular/core';
-import { Specie, SpeciesService, emptySpecie, NotifyService } from '@species/core-data';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Validators, FormGroup, FormBuilder } from '@angular/forms';
+import { Specie, NotifyService, emptySpecie } from '@ngrx-species/core-data';
+import { SpeciesFacade } from '@ngrx-species/core-state';
+import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'species-species',
+  selector: 'ngrx-species-species',
   templateUrl: './species.component.html',
-  styleUrls: ['./species.component.css']
+  styleUrls: ['./species.component.scss']
 })
 export class SpeciesComponent implements OnInit {
-  specie$;
-  selectedSpecie: Specie;
   form: FormGroup;
+  selectedSpecie: Specie;
+  species$: Observable<Specie[]> = this.speciesFacade.allSpecies$;
 
   constructor(
-    private speciesService: SpeciesService,
+    private speciesFacade: SpeciesFacade,
     private formBuilder: FormBuilder,
     private notify: NotifyService
-  ) { }
+  ) {}
+
+  ngOnInit() {
+    this.initForm();
+    this.speciesFacade.loadSpecies();
+    this.speciesFacade.mutations$.subscribe(() => this.resetSpecie());
+  }
 
   resetSpecie() {
     this.form.reset();
     this.selectSpecie(emptySpecie);
-  }
-
-  ngOnInit() {
-    this.getSpecies();
-    this.initForm();
-    this.resetSpecie();
+    Object.keys(this.form.controls).forEach(key => {
+      this.form.get(key).setErrors(null);
+    });
   }
 
   selectSpecie(specie: Specie) {
+    this.speciesFacade.selectSpecie(specie.id);
     this.selectedSpecie = specie;
     this.form.patchValue(specie);
   }
 
-  getSpecies() {
-    this.specie$ = this.speciesService.all();
-  }
-
-  saveSpecie() {
-    if(!this.form.value.id) {
-      this.createSpecie();
-    } else {
-      this.updateSpecie();
-    }
+  createSpecie() {
+    this.notify.notification(`You have created ${this.form.value.title}`);
+    this.speciesFacade.createSpecie(this.form.value);
   }
 
   updateSpecie() {
-    this.speciesService.update(this.form.value).subscribe(() => {
-      this.getSpecies();
-      this.resetSpecie();
-    });
-    this.notify.notification(`You have updated ${this.form.value.type}`);
+    this.notify.notification(`You have updated ${this.form.value.title}`);
+    this.speciesFacade.updateSpecie(this.form.value);
   }
 
-  createSpecie() {
-    this.speciesService.create(this.form.value).subscribe(() => {
-      this.getSpecies();
-      this.resetSpecie();
-    });
-    this.notify.notification(`You have created ${this.form.value.type}`);
+  saveSpecie(specie: Specie) {
+    if (specie.id) {
+      this.updateSpecie();
+    } else {
+      this.createSpecie();
+    }
   }
 
-  deleteSpecie(specie) {
-    this.speciesService.delete(specie.id).subscribe(() => this.getSpecies());
+  deleteSpecie(specie: Specie) {
     this.notify.notification(`You have deleted ${specie.title}`);
-  }
-
-  cancel() {
-    this.resetSpecie();
+    this.speciesFacade.deleteSpecie(specie);
   }
 
   private initForm() {

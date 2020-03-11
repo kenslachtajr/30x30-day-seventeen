@@ -4,6 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { CoreDataModule } from '@ngrx-species/core-data';
+import { CoreStateModule } from '@ngrx-species/core-state';
 import { MaterialModule } from '@ngrx-species/material';
 import { UiLoginModule } from '@ngrx-species/ui-login';
 
@@ -14,6 +15,7 @@ import { SpeciesListComponent } from './species/species-list/species-list.compon
 import { SpeciesDetailsComponent } from './species/species-details/species-details.component';
 import { SpeciesItemComponent } from './species/species-item/species-item.component';
 import { WildComponent } from './wild/wild.component';
+import { LoginComponent } from '@ngrx-species/ui-login';
 
 @NgModule({
   declarations: [
@@ -23,13 +25,14 @@ import { WildComponent } from './wild/wild.component';
     SpeciesDetailsComponent,
     SpeciesItemComponent,
     WildComponent
-  ],
+    ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
     CoreDataModule,
+    CoreStateModule,
     MaterialModule,
     UiLoginModule,
     RoutingModule

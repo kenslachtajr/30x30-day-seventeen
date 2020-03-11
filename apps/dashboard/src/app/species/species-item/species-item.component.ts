@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { SpeciesService } from '@species/core-data';
+import { SpeciesService } from '@ngrx-species/core-data';
 
 @Component({
-  selector: 'species-species-item',
+  selector: 'ngrx-species-species-item',
   templateUrl: './species-item.component.html',
-  styleUrls: ['./species-item.component.css']
+  styleUrls: ['./species-item.component.scss']
 })
 export class SpeciesItemComponent implements OnInit {
   _specie$;
@@ -13,16 +13,16 @@ export class SpeciesItemComponent implements OnInit {
     return this._specie$;
   }
   public set specie$(value) {
-    this._specie$ - value;
+    this._specie$ = value;
   }
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private specieService: SpeciesService
-  ) { }
+  ) {}
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.route.params.subscribe(param => {
       const id = param['id'];
       this.specie$ = this.specieService.findOne(id);
@@ -30,7 +30,6 @@ export class SpeciesItemComponent implements OnInit {
   }
 
   goBackToSpecies() {
-    this.router.navigate(['./species']);
+    this.router.navigate(['/species']);
   }
-
 }

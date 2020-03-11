@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'species-wild',
+  selector: 'ngrx-species-wild',
   templateUrl: './wild.component.html',
-  styleUrls: ['./wild.component.css']
+  styleUrls: ['./wild.component.scss']
 })
 export class WildComponent implements OnInit {
   constructor(private router: Router) {}

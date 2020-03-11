@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'species-root',
+  selector: 'ngrx-species-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })

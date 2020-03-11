@@ -1,22 +1,25 @@
 <mat-card>
   <mat-card-header>
-    <h1>Species</h1>
+    <mat-card-title>
+      <h1>Species</h1>
+    </mat-card-title>
   </mat-card-header>
   <mat-card-content>
     <mat-list>
-      <mat-list-item
-        *ngFor="let specie of species"
-        (click)="selected.emit(specie)"
-      >
-        <h3 mat-line>{{ specie.title }}</h3>
-        <p>{{ specie.details }}</p>
+      <mat-list-item *ngFor="let specie of species" (click)="selected.emit(specie)">
+        <h3 mat-line>Title: {{ specie.title }}</h3>
+        <p mat-line>Details: {{ specie.details }}</p>
         <button
           mat-icon-button
           (click)="deleted.emit(specie); $event.stopImmediatePropagation()"
         >
           <mat-icon *ngIf="!readonly">close</mat-icon>
         </button>
-        <button mat-icon-button (click)="$event.stopImmediatePropagation()">
+        <button
+          mat-icon-button
+          (click)="$event.stopImmediatePropagation()"
+          [routerLink]="specie.id"
+        >
           <mat-icon>more_vert</mat-icon>
         </button>
       </mat-list-item>

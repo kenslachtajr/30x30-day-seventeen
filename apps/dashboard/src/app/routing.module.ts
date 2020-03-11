@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { SpeciesComponent } from './species/species.component';
-import { LoginComponent } from '@species/ui-login';
-import { WildComponent } from './wild/wild.component';
 import { SpeciesItemComponent } from './species/species-item/species-item.component';
+import { LoginComponent } from '@ngrx-species/ui-login';
+import { WildComponent } from './wild/wild.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -18,4 +18,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class RoutingModule { }
+export class RoutingModule {}
