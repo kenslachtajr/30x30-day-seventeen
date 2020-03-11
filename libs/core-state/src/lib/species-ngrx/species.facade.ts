@@ -53,6 +53,7 @@ export class SpeciesFacade {
   deleteSpecie(specie: Specie) {
     this.dispatch(speciesActions.deleteSpecie({ specie }));
   }
+
   private dispatch(action: Action) {
     this.store.dispatch(action);
   }
